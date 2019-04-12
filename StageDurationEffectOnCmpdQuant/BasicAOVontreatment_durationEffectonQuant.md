@@ -3,7 +3,7 @@ Basic\_AOV\_TreatmentAndStageDurationEffect
 Shelly Trigg
 4/12/2019
 
-Load libraries
+**Load libraries**
 
     ## 
     ## Attaching package: 'dplyr'
@@ -23,7 +23,7 @@ Load libraries
     ## 
     ##     between, first, last
 
-load and reformat metabolite data
+**load and reformat metabolite data**
 
 ``` r
 mSet<-InitDataObjects("pktable", "stat", FALSE)
@@ -68,7 +68,7 @@ length(unique(STACKED_data$analyte))
 #651
 ```
 
-load lipids data
+**load lipids data**
 
 ``` r
 mSet<-InitDataObjects("pktable", "stat", FALSE)
@@ -118,20 +118,20 @@ length(unique(STACKED_data2$analyte))
 #3096
 ```
 
-read in stage duration data
+**read in stage duration data**
 
 ``` r
 duration <- read.csv("~/Desktop/UCSD-SALK-UW/NOAA/metabolomics/data/crab_duration_info.csv", stringsAsFactors = FALSE)
 ```
 
-read in sample ID info data
+**read in sample ID info data**
 
 ``` r
 library(readxl)
 sampleidinfo <- read_xlsx("~/Desktop/UCSD-SALK-UW/NOAA/metabolomics/data/SampleID_CrabID_info.xlsx")
 ```
 
-merge sample ID info and stage duration info with compound abundance data
+**merge sample ID info and stage duration info with compound abundance data**
 
 ``` r
 colnames(STACKED_data)[1] <- "Sample.Number"
@@ -149,7 +149,7 @@ STATISTICS
 
 ### Check if there are effects from stage duration or days on treatment
 
-test for megalopae duration effect on metabolite quant
+**test for megalopae duration effect on metabolite quant**
 
 ``` r
 fit <- aov(quant ~ M, data = STACKED_data)
@@ -160,7 +160,7 @@ summary(fit)
     ## M               1 4.164e+08 4.164e+08   0.001  0.972
     ## Residuals   39058 1.308e+16 3.349e+11
 
-test for J1 duration effect on metabolite quant
+**test for J1 duration effect on metabolite quant**
 
 ``` r
 fit <- aov(quant ~ J1, data = STACKED_data)
@@ -171,7 +171,7 @@ summary(fit)
     ## J1              1 1.244e+10 1.244e+10   0.037  0.847
     ## Residuals   39058 1.308e+16 3.349e+11
 
-test for MtoJ2 duration effect on metabolite quant
+**test for MtoJ2 duration effect on metabolite quant**
 
 ``` r
 fit <- aov(quant ~ MtoJ2, data = STACKED_data)
@@ -182,7 +182,7 @@ summary(fit)
     ## MtoJ2           1 3.407e+10 3.407e+10   0.102   0.75
     ## Residuals   39058 1.308e+16 3.349e+11
 
-test for startTOfreeze duration effect on quant
+**test for startTOfreeze duration effect on metabolite quant**
 
 ``` r
 fit <- aov(quant ~ startTOfreeze, data = STACKED_data)
@@ -193,7 +193,7 @@ summary(fit)
     ## startTOfreeze     1 3.407e+10 3.407e+10   0.102   0.75
     ## Residuals     39058 1.308e+16 3.349e+11
 
-test for treatment effect on quant
+**test for treatment effect on metabolite quant**
 
 ``` r
 fit <- aov(quant ~ treatment.x, data = STACKED_data)
@@ -206,7 +206,7 @@ summary(fit)
 
 ### Analysis for lipid data
 
-test for Megalopae duration effect on lipid quant
+**test for Megalopae duration effect on lipid quant**
 
 ``` r
 fit <- aov(quant ~ M, data = STACKED_data2)
@@ -217,7 +217,7 @@ summary(fit)
     ## M                1 3.349e+10 3.349e+10   1.699  0.192
     ## Residuals   185758 3.662e+15 1.971e+10
 
-test for J1 duration effect on lipid quant
+**test for J1 duration effect on lipid quant**
 
 ``` r
 fit <- aov(quant ~ J1, data = STACKED_data2)
@@ -230,7 +230,7 @@ summary(fit)
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-test for MtoJ2 duration effect on quant
+**test for MtoJ2 duration effect on quant**
 
 ``` r
 fit <- aov(quant ~ MtoJ2, data = STACKED_data2)
@@ -243,7 +243,7 @@ summary(fit)
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-test for startTOfreeze duration (days on experiment) effect on quant
+**test for startTOfreeze duration (days on experiment) effect on lipid quant**
 
 ``` r
 fit <- aov(quant ~ startTOfreeze, data = STACKED_data2)
@@ -256,7 +256,7 @@ summary(fit)
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-test for treatment effect on quant
+**test for treatment effect on lipid quant**
 
 ``` r
 fit <- aov(quant ~ treatment.x, data = STACKED_data2)

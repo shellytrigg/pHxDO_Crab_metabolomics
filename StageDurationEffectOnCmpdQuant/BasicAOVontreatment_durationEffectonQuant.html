@@ -27,7 +27,7 @@ body {
 
 <h1 id="basic_aov_treatmentandstagedurationeffect">Basic_AOV_TreatmentAndStageDurationEffect</h1>
 <p>Shelly Trigg<br />4/12/2019</p>
-<p>Load libraries</p>
+<p><strong>Load libraries</strong></p>
 <pre><code>## 
 ## Attaching package: 'dplyr'
 
@@ -45,7 +45,7 @@ body {
 ## The following objects are masked from 'package:dplyr':
 ## 
 ##     between, first, last</code></pre>
-<p>load and reformat metabolite data</p>
+<p><strong>load and reformat metabolite data</strong></p>
 <pre class="sourceCode r"><code class="sourceCode r">mSet&lt;-<span class="kw">InitDataObjects</span>(<span class="st">&quot;pktable&quot;</span>, <span class="st">&quot;stat&quot;</span>, <span class="ot">FALSE</span>)</code></pre>
 <pre><code>## [1] &quot;R objects intialized ...&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">mSet&lt;-<span class="kw">Read.TextData</span>(mSet, <span class="st">&quot;~/Desktop/UCSD-SALK-UW/NOAA/metabolomics/data/for metaboanalyst/339117_data4MetaboAnalyst.csv&quot;</span>, <span class="st">&quot;rowu&quot;</span>, <span class="st">&quot;disc&quot;</span>)</code></pre>
@@ -74,7 +74,7 @@ STACKED_data &lt;-<span class="st"> </span>tidyr::<span class="kw">gather</span>
 <span class="kw">length</span>(<span class="kw">unique</span>(STACKED_data$analyte))</code></pre>
 <pre><code>## [1] 651</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#651</span></code></pre>
-<p>load lipids data</p>
+<p><strong>load lipids data</strong></p>
 <pre class="sourceCode r"><code class="sourceCode r">mSet&lt;-<span class="kw">InitDataObjects</span>(<span class="st">&quot;pktable&quot;</span>, <span class="st">&quot;stat&quot;</span>, <span class="ot">FALSE</span>)</code></pre>
 <pre><code>## [1] &quot;R objects intialized ...&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">mSet&lt;-<span class="kw">Read.TextData</span>(mSet, <span class="st">&quot;~/Desktop/UCSD-SALK-UW/NOAA/metabolomics/ARTool_analysis/GenLipidsAll.csv&quot;</span>, <span class="st">&quot;rowu&quot;</span>, <span class="st">&quot;disc&quot;</span>)</code></pre>
@@ -104,12 +104,12 @@ STACKED_data2 &lt;-<span class="st"> </span>tidyr::<span class="kw">gather</span
 <span class="kw">length</span>(<span class="kw">unique</span>(STACKED_data2$analyte))</code></pre>
 <pre><code>## [1] 3096</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#3096</span></code></pre>
-<p>read in stage duration data</p>
+<p><strong>read in stage duration data</strong></p>
 <pre class="sourceCode r"><code class="sourceCode r">duration &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Desktop/UCSD-SALK-UW/NOAA/metabolomics/data/crab_duration_info.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre>
-<p>read in sample ID info data</p>
+<p><strong>read in sample ID info data</strong></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readxl)
 sampleidinfo &lt;-<span class="st"> </span><span class="kw">read_xlsx</span>(<span class="st">&quot;~/Desktop/UCSD-SALK-UW/NOAA/metabolomics/data/SampleID_CrabID_info.xlsx&quot;</span>)</code></pre>
-<p>merge sample ID info and stage duration info with compound abundance data</p>
+<p><strong>merge sample ID info and stage duration info with compound abundance data</strong></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(STACKED_data)[<span class="dv">1</span>] &lt;-<span class="st"> &quot;Sample.Number&quot;</span>
 
 STACKED_data &lt;-<span class="st"> </span><span class="kw">merge</span>(STACKED_data,sampleidinfo, <span class="dt">by =</span> <span class="st">&quot;Sample.Number&quot;</span>)
@@ -120,44 +120,44 @@ STACKED_data2 &lt;-<span class="st"> </span><span class="kw">merge</span>(STACKE
 STACKED_data2 &lt;-<span class="st"> </span><span class="kw">merge</span>(STACKED_data2,duration, <span class="dt">by =</span> <span class="st">&quot;crabID&quot;</span>)</code></pre>
 <h2 id="statistics">STATISTICS</h2>
 <h3 id="check-if-there-are-effects-from-stage-duration-or-days-on-treatment">Check if there are effects from stage duration or days on treatment</h3>
-<p>test for megalopae duration effect on metabolite quant</p>
+<p><strong>test for megalopae duration effect on metabolite quant</strong></p>
 <pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">aov</span>(quant ~<span class="st"> </span>M, <span class="dt">data =</span> STACKED_data)
 <span class="kw">summary</span>(fit)</code></pre>
 <pre><code>##                Df    Sum Sq   Mean Sq F value Pr(&gt;F)
 ## M               1 4.164e+08 4.164e+08   0.001  0.972
 ## Residuals   39058 1.308e+16 3.349e+11</code></pre>
-<p>test for J1 duration effect on metabolite quant</p>
+<p><strong>test for J1 duration effect on metabolite quant</strong></p>
 <pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">aov</span>(quant ~<span class="st"> </span>J1, <span class="dt">data =</span> STACKED_data)
 <span class="kw">summary</span>(fit)</code></pre>
 <pre><code>##                Df    Sum Sq   Mean Sq F value Pr(&gt;F)
 ## J1              1 1.244e+10 1.244e+10   0.037  0.847
 ## Residuals   39058 1.308e+16 3.349e+11</code></pre>
-<p>test for MtoJ2 duration effect on metabolite quant</p>
+<p><strong>test for MtoJ2 duration effect on metabolite quant</strong></p>
 <pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">aov</span>(quant ~<span class="st"> </span>MtoJ2, <span class="dt">data =</span> STACKED_data)
 <span class="kw">summary</span>(fit)</code></pre>
 <pre><code>##                Df    Sum Sq   Mean Sq F value Pr(&gt;F)
 ## MtoJ2           1 3.407e+10 3.407e+10   0.102   0.75
 ## Residuals   39058 1.308e+16 3.349e+11</code></pre>
-<p>test for startTOfreeze duration effect on quant</p>
+<p><strong>test for startTOfreeze duration effect on metabolite quant</strong></p>
 <pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">aov</span>(quant ~<span class="st"> </span>startTOfreeze, <span class="dt">data =</span> STACKED_data)
 <span class="kw">summary</span>(fit)</code></pre>
 <pre><code>##                  Df    Sum Sq   Mean Sq F value Pr(&gt;F)
 ## startTOfreeze     1 3.407e+10 3.407e+10   0.102   0.75
 ## Residuals     39058 1.308e+16 3.349e+11</code></pre>
-<p>test for treatment effect on quant</p>
+<p><strong>test for treatment effect on metabolite quant</strong></p>
 <pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">aov</span>(quant ~<span class="st"> </span>treatment.x, <span class="dt">data =</span> STACKED_data)
 <span class="kw">summary</span>(fit)</code></pre>
 <pre><code>##                Df    Sum Sq   Mean Sq F value Pr(&gt;F)
 ## treatment.x     3 1.329e+11 4.429e+10   0.132  0.941
 ## Residuals   39056 1.308e+16 3.349e+11</code></pre>
 <h3 id="analysis-for-lipid-data">Analysis for lipid data</h3>
-<p>test for Megalopae duration effect on lipid quant</p>
+<p><strong>test for Megalopae duration effect on lipid quant</strong></p>
 <pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">aov</span>(quant ~<span class="st"> </span>M, <span class="dt">data =</span> STACKED_data2)
 <span class="kw">summary</span>(fit)</code></pre>
 <pre><code>##                 Df    Sum Sq   Mean Sq F value Pr(&gt;F)
 ## M                1 3.349e+10 3.349e+10   1.699  0.192
 ## Residuals   185758 3.662e+15 1.971e+10</code></pre>
-<p>test for J1 duration effect on lipid quant</p>
+<p><strong>test for J1 duration effect on lipid quant</strong></p>
 <pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">aov</span>(quant ~<span class="st"> </span>J1, <span class="dt">data =</span> STACKED_data2)
 <span class="kw">summary</span>(fit)</code></pre>
 <pre><code>##                 Df    Sum Sq   Mean Sq F value Pr(&gt;F)  
@@ -165,7 +165,7 @@ STACKED_data2 &lt;-<span class="st"> </span><span class="kw">merge</span>(STACKE
 ## Residuals   185758 3.662e+15 1.971e+10                 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<p>test for MtoJ2 duration effect on quant</p>
+<p><strong>test for MtoJ2 duration effect on quant</strong></p>
 <pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">aov</span>(quant ~<span class="st"> </span>MtoJ2, <span class="dt">data =</span> STACKED_data2)
 <span class="kw">summary</span>(fit)</code></pre>
 <pre><code>##                 Df    Sum Sq   Mean Sq F value  Pr(&gt;F)   
@@ -173,7 +173,7 @@ STACKED_data2 &lt;-<span class="st"> </span><span class="kw">merge</span>(STACKE
 ## Residuals   185758 3.662e+15 1.971e+10                   
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<p>test for startTOfreeze duration (days on experiment) effect on quant</p>
+<p><strong>test for startTOfreeze duration (days on experiment) effect on lipid quant</strong></p>
 <pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">aov</span>(quant ~<span class="st"> </span>startTOfreeze, <span class="dt">data =</span> STACKED_data2)
 <span class="kw">summary</span>(fit)</code></pre>
 <pre><code>##                   Df    Sum Sq   Mean Sq F value  Pr(&gt;F)   
@@ -181,7 +181,7 @@ STACKED_data2 &lt;-<span class="st"> </span><span class="kw">merge</span>(STACKE
 ## Residuals     185758 3.662e+15 1.971e+10                   
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<p>test for treatment effect on quant</p>
+<p><strong>test for treatment effect on lipid quant</strong></p>
 <pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">aov</span>(quant ~<span class="st"> </span>treatment.x, <span class="dt">data =</span> STACKED_data2)
 <span class="kw">summary</span>(fit)</code></pre>
 <pre><code>##                 Df    Sum Sq   Mean Sq F value  Pr(&gt;F)    

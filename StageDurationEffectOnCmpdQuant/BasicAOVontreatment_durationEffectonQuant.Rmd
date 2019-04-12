@@ -5,7 +5,7 @@ date: "4/12/2019"
 output: rmarkdown::github_document
 ---
 
-Load libraries
+**Load libraries**
 ```{r, echo = FALSE}
 library("MetaboAnalystR")
 library("broom")
@@ -17,7 +17,7 @@ library(ggplot2)
 library(readxl)
 ```
 
-load and reformat metabolite data
+**load and reformat metabolite data**
 
 ```{r}
 mSet<-InitDataObjects("pktable", "stat", FALSE)
@@ -46,7 +46,7 @@ length(unique(STACKED_data$analyte))
 
 ```
 
-load lipids data
+**load lipids data**
 
 ```{r}
 mSet<-InitDataObjects("pktable", "stat", FALSE)
@@ -76,18 +76,18 @@ length(unique(STACKED_data2$analyte))
 ```
 
 
-read in stage duration data
+**read in stage duration data**
 ```{r}
 duration <- read.csv("~/Desktop/UCSD-SALK-UW/NOAA/metabolomics/data/crab_duration_info.csv", stringsAsFactors = FALSE)
 ```
 
-read in sample ID info data
+**read in sample ID info data**
 ```{r}
 library(readxl)
 sampleidinfo <- read_xlsx("~/Desktop/UCSD-SALK-UW/NOAA/metabolomics/data/SampleID_CrabID_info.xlsx")
 ```
 
-merge sample ID info and stage duration info with compound abundance data
+**merge sample ID info and stage duration info with compound abundance data**
 ```{r}
 colnames(STACKED_data)[1] <- "Sample.Number"
 
@@ -103,31 +103,31 @@ STACKED_data2 <- merge(STACKED_data2,duration, by = "crabID")
 
 ### Check if there are effects from stage duration or days on treatment
 
-test for megalopae duration effect on metabolite quant
+**test for megalopae duration effect on metabolite quant**
 ```{r}
 fit <- aov(quant ~ M, data = STACKED_data)
 summary(fit)
 ```
 
-test for J1 duration effect on metabolite quant
+**test for J1 duration effect on metabolite quant**
 ```{r}
 fit <- aov(quant ~ J1, data = STACKED_data)
 summary(fit)
 ```
 
-test for MtoJ2 duration effect on metabolite quant
+**test for MtoJ2 duration effect on metabolite quant**
 ```{r}
 fit <- aov(quant ~ MtoJ2, data = STACKED_data)
 summary(fit)
 ```
 
-test for startTOfreeze duration effect on quant
+**test for startTOfreeze duration effect on metabolite quant**
 ```{r}
 fit <- aov(quant ~ startTOfreeze, data = STACKED_data)
 summary(fit)
 ```
 
-test for treatment effect on quant
+**test for treatment effect on metabolite quant**
 ```{r}
 fit <- aov(quant ~ treatment.x, data = STACKED_data)
 summary(fit)
@@ -136,31 +136,31 @@ summary(fit)
 
 ### Analysis for lipid data
 
-test for Megalopae duration effect on lipid quant
+**test for Megalopae duration effect on lipid quant**
 ```{r}
 fit <- aov(quant ~ M, data = STACKED_data2)
 summary(fit)
 ```   
 
-test for J1 duration effect on lipid quant
+**test for J1 duration effect on lipid quant**
 ```{r}
 fit <- aov(quant ~ J1, data = STACKED_data2)
 summary(fit)
 ```    
 
-test for MtoJ2 duration effect on quant
+**test for MtoJ2 duration effect on quant**
 ```{r}
 fit <- aov(quant ~ MtoJ2, data = STACKED_data2)
 summary(fit)
 ``` 
 
-test for startTOfreeze duration (days on experiment) effect on quant
+**test for startTOfreeze duration (days on experiment) effect on lipid quant**
 ```{r}
 fit <- aov(quant ~ startTOfreeze, data = STACKED_data2)
 summary(fit)
 ```
 
-test for treatment effect on quant
+**test for treatment effect on lipid quant**
 ```{r}
 fit <- aov(quant ~ treatment.x, data = STACKED_data2)
 summary(fit)
