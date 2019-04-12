@@ -23,7 +23,7 @@ library("readxl")
 Read in and format crabs selected for metabolomics data
 ```{r}
 #this data was created by Krista and is on the OA drive in the metabolomics analysis folder in the crab_2016_pHxDO_megalopae folder and called "crab OA omics samples 2016.xlsx"
-good_mega <- read_xlsx("~/Desktop/UCSD-SALK-UW/NOAA/metabolomics/data/crab OA omics samples 2016.xlsx", sheet = "metabolomics selected 4.17", skip = 2)
+good_mega <- read_xlsx("~/Documents/GitHub/pHxDO_Crab_metabolomics/TreatmentEffectOnStageDuration/data/crab OA omics samples 2016.xlsx", sheet = "metabolomics selected 4.17", skip = 2)
 
 #make a start date character string column
 good_mega$dateString <- paste(substr(good_mega$startDate,7,7),substr(good_mega$startDate,9,10),substr(good_mega$startDate,3,4), sep = ".")  
@@ -43,7 +43,7 @@ good_mega$crabID <- paste(good_mega$MOATS, good_mega$JAR, good_mega$dateString, 
 read in stage data file
 ```{r}
 #this data is on the OA drive under Experiments -> Crab -> Crab megalopae 2016 called "Updated Megalopae-Juvenile Data Sheet.csv"
-d <- read.csv("~/Desktop/UCSD-SALK-UW/NOAA/metabolomics/2017Megalopae_selects_4metabolomics/Updated Megalopae-Juvenile Data Sheet.csv", 
+d <- read.csv("~/Documents/GitHub/pHxDO_Crab_metabolomics/TreatmentEffectOnStageDuration/data/Updated Megalopae-Juvenile Data Sheet.csv", 
               stringsAsFactors=FALSE, skip = 1, header = TRUE)
 #str(d)
 #View(d)
@@ -57,7 +57,7 @@ d <- subset(d, MOATS != "M13")
 read MOATS treatment table
 ```{r}
 #this data was created from "Treatments.xlsx" on the OA drive under Experiments -> Crab -> Crab megalopae 2016
-dTreat <- read.csv("~/Desktop/UCSD-SALK-UW/NOAA/metabolomics/2017Megalopae_selects_4metabolomics/Treatments_2016_08_15.csv")
+dTreat <- read.csv("~/Documents/GitHub/pHxDO_Crab_metabolomics/TreatmentEffectOnStageDuration/data/Treatments_2016_08_15.csv")
 #View(dTreat)
 ```
 
